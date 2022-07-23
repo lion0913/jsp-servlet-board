@@ -1,6 +1,7 @@
 package com.ll.exam.dto;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class BoardDto {
     private long id;
@@ -10,9 +11,11 @@ public class BoardDto {
     private String code;
 
     public BoardDto(long id, String createDate, String modifyDate, String name, String code) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
         this.id = id;
-        this.createDate = LocalDateTime.parse(createDate);
-        this.modifyDate = LocalDateTime.parse(modifyDate);
+        this.createDate = LocalDateTime.parse(createDate, formatter);
+        this.modifyDate = LocalDateTime.parse(modifyDate, formatter);
         this.name = name;
         this.code = code;
     }
