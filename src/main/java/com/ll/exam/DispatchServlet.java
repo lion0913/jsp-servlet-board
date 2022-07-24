@@ -1,7 +1,7 @@
 package com.ll.exam;
 
-import com.ll.exam.article.ArticleController;
-import com.ll.exam.member.MemberController;
+import com.ll.exam.controller.article.ArticleController;
+import com.ll.exam.controller.member.MemberController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,6 +29,5 @@ public class DispatchServlet extends HttpServlet {
             case "/usr/member/login":
                 memberController.login(rq);
         }
-//        super.doGet(req, resp);
     }
 }

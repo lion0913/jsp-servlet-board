@@ -1,4 +1,4 @@
-package com.ll.exam.member;
+package com.ll.exam.controller.member;
 
 import com.ll.exam.Rq;
 

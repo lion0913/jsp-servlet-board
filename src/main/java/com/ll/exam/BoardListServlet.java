@@ -16,13 +16,13 @@ import java.util.List;
 @WebServlet("/list")
 public class BoardListServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BoardDao dao = new BoardDao();
         List<BoardDto> boardList = dao.getBoards();
         request.setAttribute("boardList", boardList);
 
         System.out.println("list success!");
-        RequestDispatcher rd = request.getRequestDispatcher("/list.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/article/list.jsp");
         rd.forward(request, response);
     }
 }
