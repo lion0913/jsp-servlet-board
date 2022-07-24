@@ -1,4 +1,4 @@
-package com.ll.exam;
+package com.ll.exam.util;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,6 +9,15 @@ import java.io.UnsupportedEncodingException;
 public class Rq {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
+
+
+    public HttpServletRequest getReq() {
+        return req;
+    }
+
+    public HttpServletResponse getResp() {
+        return resp;
+    }
 
     public Rq(HttpServletRequest req, HttpServletResponse resp) {
         try {
@@ -48,11 +57,4 @@ public class Rq {
         }
     }
 
-    public HttpServletRequest getReq() {
-        return req;
-    }
-
-    public HttpServletResponse getResp() {
-        return resp;
-    }
 }

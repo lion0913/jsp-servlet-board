@@ -1,6 +1,6 @@
 package com.ll.exam.controller.article;
 
-import com.ll.exam.Rq;
+import com.ll.exam.util.Rq;
 import com.ll.exam.dao.BoardDao;
 import com.ll.exam.dto.BoardDto;
 import jakarta.servlet.RequestDispatcher;

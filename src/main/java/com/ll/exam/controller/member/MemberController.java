@@ -1,6 +1,6 @@
 package com.ll.exam.controller.member;
 
-import com.ll.exam.Rq;
+import com.ll.exam.util.Rq;
 
 public class MemberController {
     public void login(Rq rq){

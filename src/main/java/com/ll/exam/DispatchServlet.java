@@ -2,6 +2,7 @@ package com.ll.exam;
 
 import com.ll.exam.controller.article.ArticleController;
 import com.ll.exam.controller.member.MemberController;
+import com.ll.exam.util.Rq;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
