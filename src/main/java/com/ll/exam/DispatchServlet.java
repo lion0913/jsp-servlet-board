@@ -1,6 +1,7 @@
 package com.ll.exam;
 
 import com.ll.exam.controller.article.ArticleController;
+import com.ll.exam.controller.board.BoardController;
 import com.ll.exam.controller.member.MemberController;
 import com.ll.exam.util.Rq;
 import jakarta.servlet.ServletException;
@@ -20,12 +21,16 @@ public class DispatchServlet extends HttpServlet {
 
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
+        BoardController boardController = new BoardController();
 
         String url = req.getRequestURI();
 
         switch(url) {
             case "/usr/article/list/free" :
                 articleController.showList(rq);
+                break;
+            case "/usr/board/list/free" :
+                boardController.showList(rq);
                 break;
             case "/usr/member/login":
                 memberController.login(rq);

@@ -10,10 +10,6 @@ import java.sql.*;
 import java.util.*;
 
 public class BoardDao {
-    private String dbUrl;
-    private String dbUser;
-    private String dbpasswd;
-
     private Connection conn;
 
     public BoardDao() throws IOException {

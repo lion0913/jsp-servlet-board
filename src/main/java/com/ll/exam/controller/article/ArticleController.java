@@ -1,5 +1,7 @@
 package com.ll.exam.controller.article;
 
+import com.ll.exam.dao.ArticleDao;
+import com.ll.exam.dto.ArticleDto;
 import com.ll.exam.util.Rq;
 import com.ll.exam.dao.BoardDao;
 import com.ll.exam.dto.BoardDto;
@@ -11,11 +13,11 @@ import java.util.List;
 
 public class ArticleController {
     public void showList(Rq rq) throws ServletException, IOException {
-        BoardDao dao = new BoardDao();
+        ArticleDao dao = new ArticleDao();
 
-        List<BoardDto> boardList = dao.getBoards();
+        List<ArticleDto> boardList = dao.getBoards();
 
-        rq.getReq().setAttribute("boardList", boardList);
+        rq.getReq().setAttribute("articleList", boardList);
 
         System.out.println("list success!");
         RequestDispatcher rd = rq.getReq().getRequestDispatcher("/article/list.jsp");

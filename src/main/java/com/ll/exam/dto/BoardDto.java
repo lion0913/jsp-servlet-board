@@ -14,7 +14,6 @@ public class BoardDto {
 
     public BoardDto(long id, String createDate, String modifyDate, String name, BoardType code) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        LocalDateTime dateTime = LocalDateTime.parse(createDate, formatter);
         this.id = id;
         this.createDate = LocalDateTime.parse(createDate, formatter);
         this.modifyDate = LocalDateTime.parse(modifyDate, formatter);
