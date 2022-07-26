@@ -2,6 +2,7 @@ package com.ll.exam.controller.article;
 
 import com.ll.exam.dao.ArticleDao;
 import com.ll.exam.dto.ArticleDto;
+import com.ll.exam.dto.ArticleWriteDto;
 import com.ll.exam.util.Rq;
 import com.ll.exam.dao.BoardDao;
 import com.ll.exam.dto.BoardDto;
@@ -24,5 +25,7 @@ public class ArticleController {
         rd.forward(rq.getReq(), rq.getResp());
     }
 
-
+    public void showWriteArticle(Rq rq) {
+        rq.view("/article/write");
+    }
 }

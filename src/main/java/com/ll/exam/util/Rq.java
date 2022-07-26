@@ -1,5 +1,7 @@
 package com.ll.exam.util;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -53,6 +55,17 @@ public class Rq {
         try {
             resp.getWriter().append(formatted);
         } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void view(String path) {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(path + ".jsp");
+        try {
+            requestDispatcher.forward(req, resp);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
