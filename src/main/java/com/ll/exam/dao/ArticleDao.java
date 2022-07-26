@@ -49,4 +49,10 @@ public class ArticleDao {
         }
         return list;
     }
+
+    public void writeArticle(String title, String body) {
+        if(title == null) return;
+
+        String sql = "insert into article set id=%d, createDate = %s, %".formatted();
+    }
 }

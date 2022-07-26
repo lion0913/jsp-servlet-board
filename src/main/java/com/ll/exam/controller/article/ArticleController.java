@@ -28,4 +28,12 @@ public class ArticleController {
     public void showWriteArticle(Rq rq) {
         rq.view("/article/write");
     }
+
+    public void writeArticle(Rq rq) {
+        String title = rq.getParam("title", "");
+        String body = rq.getParam("body", "");
+
+        System.out.println("title: "+title+"\n body: "+body);
+
+    }
 }
