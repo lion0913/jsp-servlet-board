@@ -23,10 +23,9 @@ public class DispatchServlet extends HttpServlet {
         ArticleController articleController = new ArticleController();
         BoardController boardController = new BoardController();
 
-        String url = req.getRequestURI();
         switch (rq.getMethod()) {
             case "GET":
-                switch (rq.getPath()) {
+                switch (rq.getActionPath()) {
                     case "/usr/article/list/free":
                         articleController.showList(rq);
                         break;
@@ -35,6 +34,9 @@ public class DispatchServlet extends HttpServlet {
                         break;
                     case "/usr/article/write/free":
                         articleController.showWriteArticle(rq);
+                        break;
+                    case "/usr/article/delete/free":
+                        articleController.deleteArticle(rq);
                         break;
                     case "/usr/member/login":
                         memberController.login(rq);

@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
 
 
     <div class="container">
-        <button class="btn btn-dark" type="button" onclick="location.href='write'">글쓰기</button>
+        <button class="btn btn-dark" type="button" onclick="location.href='/usr/article/write/free'">글쓰기</button>
         <table class="table table-hover">
             <thead>
             <tr>

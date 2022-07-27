@@ -1,33 +1,24 @@
-package com.ll.exam.dao;
+package com.ll.exam.controller.article;
 
 import com.ll.exam.dto.ArticleDto;
-import com.ll.exam.dto.BoardDto;
 import com.ll.exam.model.Article;
-import com.ll.exam.type.board.BoardType;
-import com.ll.exam.util.DBConnectUtil;
 import com.ll.exam.util.DBConnection;
 import com.ll.exam.util.SecSql;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class ArticleDao {
-//    private Connection conn;
+public class ArticleRepository {
+
     private DBConnection dbConnection;
 
-    public ArticleDao() {
+    public ArticleRepository() {
         dbConnection = new DBConnection();
         dbConnection.setDevMode(true);
-
     }
 
-    public List<ArticleDto> getBoards() {
+    public List<ArticleDto> findAll() {
         SecSql sql = dbConnection.genSecSql();
         sql
                 .append("select a.id, b.name, a.createdDate, a.title, a.body from article a inner join board b on a.boardId=b.id order by b.name, a.id asc;");
@@ -40,17 +31,21 @@ public class ArticleDao {
         return articleDtoList;
     }
 
-    public void writeArticle(String title, String body) {
-        if(title == null) return;
-
+    public Article findById(long id) {
         SecSql sql = dbConnection.genSecSql();
         sql
-                .append("INSERT INTO article")
-                .append("SET createdDate = NOW()")
-                .append(", modifiedDate = NOW()")
-                .append(", title = ?", "제목 new")
-                .append(", body = ?", "내용 new");
+                .append("SELECT * FROM article where id = %d;".formatted(id));
+        Article article = sql.selectRow(Article.class);
 
-        long newId = sql.insert();
+        return article;
+    }
+
+    public long deleteById(long id) {
+        SecSql sql = dbConnection.genSecSql();
+        sql
+                .append("DELETE FROM article where id = %d;".formatted(id));
+        long affectedRowsCount = sql.delete();
+
+        return affectedRowsCount;
     }
 }
