@@ -1,6 +1,7 @@
 package DBUtil;
 
 
+import com.ll.exam.dto.ArticleDto;
 import com.ll.exam.model.Article;
 import com.ll.exam.util.DBConnection;
 import com.ll.exam.util.SecSql;
@@ -22,8 +23,6 @@ public class DBConnectionTest2 {
     public void beforeAll() {
         dbConnection = new DBConnection();
         dbConnection.setDevMode(true);
-
-//        createArticleTable();
     }
 
     @Test
@@ -37,6 +36,22 @@ public class DBConnectionTest2 {
             long id = i + 1;
 
             Article articleDto = articleDtoList.get(i);
+
+            System.out.println(articleDto.toString());
+        });
+    }
+
+    @Test
+    public void articleDtoTest() {
+        SecSql sql = dbConnection.genSecSql();
+        sql
+                .append("select a.id, b.name, a.createdDate, a.title, a.body from article a inner join board b on a.boardId=b.id order by b.name, a.id asc;");
+        List<ArticleDto> articleDtoList = sql.selectRows(ArticleDto.class);
+
+        IntStream.range(0, articleDtoList.size()).forEach(i -> {
+            long id = i + 1;
+
+            ArticleDto articleDto = articleDtoList.get(i);
 
             System.out.println(articleDto.toString());
         });

@@ -21,8 +21,7 @@ public class ArticleController {
         rq.getReq().setAttribute("articleList", boardList);
 
         System.out.println("list success!");
-        RequestDispatcher rd = rq.getReq().getRequestDispatcher("/article/list.jsp");
-        rd.forward(rq.getReq(), rq.getResp());
+        rq.view("/article/list");
     }
 
     public void showWriteArticle(Rq rq) {
