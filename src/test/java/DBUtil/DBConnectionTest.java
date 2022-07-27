@@ -1,8 +1,5 @@
 package DBUtil;
 
-
-
-import com.ll.exam.dto.ArticleDto;
 import com.ll.exam.util.DBConnection;
 import com.ll.exam.util.SecSql;
 import org.junit.jupiter.api.BeforeAll;

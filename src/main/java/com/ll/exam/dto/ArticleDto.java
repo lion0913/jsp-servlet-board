@@ -59,4 +59,15 @@ public class ArticleDto {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "ArticleDto{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
