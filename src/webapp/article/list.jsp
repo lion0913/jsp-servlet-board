@@ -33,6 +33,7 @@ pageEncoding="UTF-8"%>
                 <th>제목</th>
                 <th>내용</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -41,10 +42,10 @@ pageEncoding="UTF-8"%>
                     <td>${list.id}</td>
                     <td>${list.name}</td>
                     <td>${list.createdDate}</td>
-                    <td>${list.title}</td>
+                    <td><a class="w-[40px] hover:underline hover:text-[blue]" href="/usr/article/detail/free/${list.id}">${list.title}</a></td>
                     <td>${list.body}</td>
+                    <td><a class="hover:underline hover:text-[red]" href="/usr/article/modify/free/${list.id}">수정</a></td>
                     <td><a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" class="w-[100px] hover:underline hover:text-[red]" href="/usr/article/delete/free/${list.id}">삭제</a></td>
-
                 </tr>
             </c:forEach>
             </tbody>

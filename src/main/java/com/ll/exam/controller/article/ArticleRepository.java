@@ -6,6 +6,7 @@ import com.ll.exam.util.DBConnection;
 import com.ll.exam.util.SecSql;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -47,5 +48,32 @@ public class ArticleRepository {
         long affectedRowsCount = sql.delete();
 
         return affectedRowsCount;
+    }
+
+    public void saveOrUpdate(Article article) {
+        SecSql sql = dbConnection.genSecSql();
+
+        String query = "UPDATE article SET ";
+
+        if(article.getTitle() != null) {
+            query += " title = \"%s\",".formatted(article.getTitle());
+        }
+
+        if(article.getBody() != null) {
+            query += " body = \"%s\",".formatted(article.getBody());
+        }
+
+        if(article.getModifiedDate() != null) {
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String dateToStr = dateFormat.format(article.getModifiedDate());
+
+            query += " modifiedDate = \"%s\",".formatted(dateToStr);
+        }
+
+        query = query.substring(0, query.length()-1);
+        sql.append(query);
+        sql.append(" WHERE article.id = %d;".formatted(article.getId()));
+
+        sql.update();
     }
 }

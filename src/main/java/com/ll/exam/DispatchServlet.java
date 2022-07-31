@@ -38,15 +38,24 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/delete/free":
                         articleController.deleteArticle(rq);
                         break;
+                    case "/usr/article/detail/free":
+                        articleController.showDetail(rq);
+                        break;
+                    case "/usr/article/modify/free":
+                        articleController.showModifyArticle(rq);
+                        break;
                     case "/usr/member/login":
                         memberController.login(rq);
                         break;
                 }
                 break;
             case "POST":
-                switch (rq.getPath()) {
+                switch (rq.getActionPath()) {
                     case "/usr/article/write/free":
                         articleController.writeArticle(rq);
+                        break;
+                    case "/usr/article/modify/free":
+                        articleController.doModifyArticle(rq);
                         break;
                 }
                 break;

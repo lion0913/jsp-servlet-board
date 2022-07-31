@@ -1,16 +1,11 @@
 package com.ll.exam.controller.article;
 
-import com.ll.exam.dao.ArticleDao;
+import com.ll.exam.dto.ArticleDetailDto;
 import com.ll.exam.dto.ArticleDto;
-import com.ll.exam.dto.ArticleWriteDto;
 import com.ll.exam.model.Article;
 import com.ll.exam.util.Rq;
-import com.ll.exam.dao.BoardDao;
-import com.ll.exam.dto.BoardDto;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
 
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ArticleController {
@@ -23,7 +18,7 @@ public class ArticleController {
     public void showList(Rq rq) {
         List<ArticleDto> articleList = articleService.findAll();
 
-        rq.getReq().setAttribute("articleList", articleList);
+        rq.setAttr("articleList", articleList);
 
         rq.view("/article/list");
     }
@@ -63,5 +58,56 @@ public class ArticleController {
         }
         rq.appendBody("<div>%d번 게시물이 삭제되었습니다.</div>".formatted(id));
         rq.appendBody("<div><a href=\"/usr/article/list/free\">리스트로 이동</a></div>");
+    }
+
+    public void showDetail(Rq rq) {
+        long id = rq.getLongPathValueByIndex(1, 0);
+
+        if (id == 0) {
+            rq.appendBody("번호를 입력해주세요.");
+            return;
+        }
+        Article article = articleService.findById(id);
+        ArticleDetailDto articleDetailDto = new ArticleDetailDto(article.getTitle(), article.getBody());
+
+        rq.setAttr("article", articleDetailDto);
+        rq.view("/article/detail");
+
+    }
+
+    public void showModifyArticle(Rq rq) {
+        long id = rq.getLongPathValueByIndex(1, 0);
+        if (id == 0) {
+            rq.appendBody("번호를 입력해주세요.");
+            return;
+        }
+        Article article = articleService.findById(id);
+        ArticleDetailDto articleDetailDto = new ArticleDetailDto(article.getTitle(), article.getBody());
+
+        rq.setAttr("article", articleDetailDto);
+        rq.view("/article/modify");
+    }
+
+    public void doModifyArticle(Rq rq) {
+        long id = rq.getLongPathValueByIndex(1, 0);
+        if (id == 0) {
+            rq.historyBack("번호를 입력해주세요.");
+            return;
+        }
+        Article article = articleService.findById(id);
+        if(article == null) {
+            rq.appendBody("존재하지 않는 게시글입니다.");
+        }
+
+        String title = rq.getParam("title", "");
+        String body = rq.getParam("body", "");
+
+        article.setTitle(title);
+        article.setBody(body);
+        article.setModifiedDate(LocalDateTime.now());
+
+        articleService.saveOrUpdate(article);
+
+        rq.replace("/usr/article/list/free", "%d번 게시물이 정상적으로 수정되었습니다.".formatted(id));
     }
 }

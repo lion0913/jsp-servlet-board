@@ -81,6 +81,10 @@ public class Rq {
         return value;
     }
 
+    public void setAttr(String name, Object value) {
+        req.setAttribute(name, value);
+    }
+
     public String getPathValueByIndex(int index, String defaultValue) {
         String[] bits = req.getRequestURI().split("/");
 
@@ -120,11 +124,55 @@ public class Rq {
         return sb.toString();
     }
 
+    public void print(String str) {
+        try {
+            resp.getWriter().append(str);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void println(String str) {
+        print(str + "\n");
+    }
+
+    public void historyBack(String msg) {
+        if (msg != null && msg.trim().length() > 0) {
+            println("""
+                    <script>
+                    alert("%s");
+                    </script>
+                    """.formatted(msg));
+        }
+
+        println("""
+                <script>
+                history.back();
+                </script>
+                """);
+    }
+
     public String getPath() {
         return req.getRequestURI();
     }
 
     public String getMethod() {
         return req.getMethod();
+    }
+
+    public void replace(String uri, String msg) {
+        if (msg != null && msg.trim().length() > 0) {
+            println("""
+                    <script>
+                    alert("%s");
+                    </script>
+                    """.formatted(msg));
+        }
+
+        println("""
+                <script>
+                location.replace("%s");
+                </script>
+                """.formatted(uri));
     }
 }
