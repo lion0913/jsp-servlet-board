@@ -100,4 +100,18 @@ public class DBConnectionTest2 {
 
         assertThat(affectedRowsCount).isEqualTo(1);
     }
+
+    @Test
+    public void insertTest() {
+        Article article = new Article();
+        article.setBody("test");
+        article.setTitle("test title");
+        article.setCreatedDate(LocalDateTime.now());
+        article.setModifiedDate(LocalDateTime.now());
+        article.setBoardId(1);
+
+        ArticleService articleService = new ArticleService();
+        articleService.write(article);
+
+    }
 }

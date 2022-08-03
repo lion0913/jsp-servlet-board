@@ -27,4 +27,8 @@ public class ArticleService {
     public void saveOrUpdate(Article article) {
         articleRepository.saveOrUpdate(article);
     }
+
+    public long write(Article article) {
+        return articleRepository.write(article);
+    }
 }

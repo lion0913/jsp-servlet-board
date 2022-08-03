@@ -76,4 +76,20 @@ public class ArticleRepository {
 
         sql.update();
     }
+
+    public long write(Article article) {
+        SecSql sql = dbConnection.genSecSql();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String createdDate = dateFormat.format(article.getCreatedDate());
+        String modifiedDate = dateFormat.format(article.getModifiedDate());
+        sql
+                .append("INSERT INTO article")
+                .append("SET createdDate = ?", createdDate)
+                .append(", modifiedDate = ?", modifiedDate)
+                .append(", title = ?", article.getTitle())
+                .append(", body = ?", article.getBody())
+                .append(", boardId = %d".formatted(article.getBoardId()));
+
+        return sql.insert();
+    }
 }

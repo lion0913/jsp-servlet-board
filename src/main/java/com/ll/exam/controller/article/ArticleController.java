@@ -32,7 +32,20 @@ public class ArticleController {
         String body = rq.getParam("body", "");
 
         System.out.println("title: "+title+"\n body: "+body);
+        Article article = new Article();
+        article.setBody(body);
+        article.setTitle(title);
+        article.setCreatedDate(LocalDateTime.now());
+        article.setModifiedDate(LocalDateTime.now());
+        article.setBoardId(1);
 
+        long result = articleService.write(article);
+        System.out.println(result);
+        if(result <= 0) {
+            rq.appendBody("글 등록에 실패했습니다.");
+            return;
+        }
+        rq.replace("/usr/article/list/free", "게시물이 정상적으로 등록되었습니다.");
     }
 
     public void deleteArticle(Rq rq) {
